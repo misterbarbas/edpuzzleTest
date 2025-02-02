@@ -1,0 +1,11 @@
+{
+  "availability-zones:account=108782062085:region=eu-west-3": [
+    "eu-west-3a",
+    "eu-west-3b",
+    "eu-west-3c"
+  ],
+  "hosted-zone:account=108782062085:domainName=edblog.com:region=eu-west-3": {
+    "Id": "/hostedzone/Z09203512W0BS7BB53FL1",
+    "Name": "edblog.com."
+  }
+}
