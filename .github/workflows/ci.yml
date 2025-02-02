@@ -1,0 +1,25 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main  # This triggers the workflow on push to the 'main' branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checks out your repository so the workflow can access it
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Sets up Node.js environment
+        with:
+          node-version: '14'  # Specify the Node.js version 
+
+      - name: Install dependencies
+        run: npm install  # Installs project dependencies
+
+      - name: Run tests
+        run: npm test  # Runs the tests related with package.json)
