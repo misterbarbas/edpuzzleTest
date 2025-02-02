@@ -1,0 +1,43 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main  # Only trigger when there are changes in the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use a standard Ubuntu runner
+    
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2  # This action checks out your repository
+
+      # Step 2: Set up Node.js (if your app uses Node.js)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Set the version you are using
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install  # Run npm install to install any dependencies
+
+      # Step 4: Run tests (optional, but good practice)
+      - name: Run tests
+        run: npm test  # Ensure that tests pass before deploying
+
+      # Step 5: Build the project (optional, depending on your build process)
+      - name: Build the project
+        run: npm run build  # Use build script if your project requires building
+
+      # Step 6: Deploy to AWS (Assuming you use AWS CDK or Elastic Beanstalk for deployment)
+      - name: Deploy to AWS
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1  # Choose your AWS region
+        run: |
+          npm install -g aws-cdk  # Install AWS CDK globally
+          cdk deploy --require-approval never  # Deploy the infrastructure and app
